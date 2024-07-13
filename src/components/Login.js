@@ -42,6 +42,7 @@ const Login = () => {
     }
 
     if (email === mainUser && password === mainPassword) {
+      console.log('Login successful! Redirecting to dashboard...');
       alert('Login successful!');
       navigate('/dashboard');
     } else {
