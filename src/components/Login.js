@@ -8,7 +8,18 @@ const Login = () => {
   useEffect(() => {
     const video = document.getElementById('background-video');
     if (video) {
-      video.play().catch(error => console.error('Error attempting to play', error));
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // Automatic playback started!
+          })
+          .catch(error => {
+            // Auto-play was prevented, add a play button
+            video.controls = true;
+            console.error('Auto-play was prevented:', error);
+          });
+      }
     }
   }, []);
 
