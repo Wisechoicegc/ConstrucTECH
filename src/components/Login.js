@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const video = document.getElementById('background-video');
+    if (video) {
+      video.play().catch(error => console.error('Error attempting to play', error));
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +20,7 @@ const Login = () => {
 
   return (
     <div className="login-wrapper">
-      <video autoPlay muted loop className="background-video">
+      <video id="background-video" autoPlay muted loop className="background-video">
         <source src={`${process.env.PUBLIC_URL}/output.mp4`} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
