@@ -16,6 +16,8 @@ const Login = () => {
           window.grecaptcha.execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'login' }).then(token => {
             console.log('reCAPTCHA token:', token); // Log the token for testing purposes
             setRecaptchaToken(token);
+          }).catch(error => {
+            console.error('reCAPTCHA execution error:', error);
           });
         });
       } else {
@@ -35,6 +37,7 @@ const Login = () => {
     console.log('Password:', password);
     console.log('Main User:', mainUser);
     console.log('Main Password:', mainPassword);
+    console.log('reCAPTCHA token at submit:', recaptchaToken);
 
     if (!recaptchaToken) {
       setError('Please complete the reCAPTCHA');
@@ -46,6 +49,7 @@ const Login = () => {
       alert('Login successful!');
       navigate('/dashboard');
     } else {
+      console.error('Invalid username or password');
       setError('Invalid username or password');
     }
   };
