@@ -7,6 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [recaptchaToken, setRecaptchaToken] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,6 +55,10 @@ const Login = () => {
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="login-wrapper">
       <video id="background-video" autoPlay muted loop playsInline className="background-video">
@@ -76,13 +81,18 @@ const Login = () => {
           </div>
           <div className="input-group">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <span className="password-toggle-icon" onClick={toggleShowPassword}>
+                {showPassword ? "🙈" : "👁️"}
+              </span>
+            </div>
           </div>
           <button type="submit">Login</button>
         </form>

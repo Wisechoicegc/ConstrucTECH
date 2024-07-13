@@ -68,6 +68,18 @@ input {
   width: calc(100% - 22px); /* Adjust width to accommodate padding */
 }
 
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 button {
   padding: 10px;
   font-size: 16px;
