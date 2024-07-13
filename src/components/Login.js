@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -6,6 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [recaptchaToken, setRecaptchaToken] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadRecaptcha = () => {
@@ -22,17 +24,22 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const mainUser = process.env.REACT_APP_MAIN_USER;
+    const mainPassword = process.env.REACT_APP_MAIN_PASSWORD;
+
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Main User:', mainUser);
+    console.log('Main Password:', mainPassword);
+
     if (!recaptchaToken) {
       setError('Please complete the reCAPTCHA');
       return;
     }
 
-    const mainUser = process.env.REACT_APP_MAIN_USER;
-    const mainPassword = process.env.REACT_APP_MAIN_PASSWORD;
-
     if (email === mainUser && password === mainPassword) {
       alert('Login successful!');
-      // Redirect to dashboard or main page
+      navigate('/dashboard');
     } else {
       setError('Invalid username or password');
     }
