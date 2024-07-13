@@ -11,12 +11,16 @@ const Login = () => {
 
   useEffect(() => {
     const loadRecaptcha = () => {
-      window.grecaptcha.ready(() => {
-        window.grecaptcha.execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'login' }).then(token => {
-          console.log('reCAPTCHA token:', token); // Log the token for testing purposes
-          setRecaptchaToken(token);
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha.execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'login' }).then(token => {
+            console.log('reCAPTCHA token:', token); // Log the token for testing purposes
+            setRecaptchaToken(token);
+          });
         });
-      });
+      } else {
+        console.error('reCAPTCHA not loaded');
+      }
     };
     loadRecaptcha();
   }, []);
