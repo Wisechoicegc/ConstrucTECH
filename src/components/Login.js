@@ -7,20 +7,19 @@ const Login = () => {
 
   useEffect(() => {
     const video = document.getElementById('background-video');
-    if (video) {
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            // Automatic playback started!
-          })
-          .catch(error => {
-            // Auto-play was prevented, add a play button
-            video.controls = true;
-            console.error('Auto-play was prevented:', error);
-          });
-      }
-    }
+    const attemptPlay = () => {
+      video.play().catch(error => {
+        console.error('Error attempting to play', error);
+      });
+    };
+
+    document.addEventListener('click', attemptPlay);
+    document.addEventListener('touchstart', attemptPlay);
+
+    return () => {
+      document.removeEventListener('click', attemptPlay);
+      document.removeEventListener('touchstart', attemptPlay);
+    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -31,7 +30,7 @@ const Login = () => {
 
   return (
     <div className="login-wrapper">
-      <video id="background-video" autoPlay muted loop className="background-video">
+      <video id="background-video" autoPlay muted loop playsInline className="background-video">
         <source src={`${process.env.PUBLIC_URL}/output_mobile.mp4`} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
