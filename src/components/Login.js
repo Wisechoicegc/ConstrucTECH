@@ -4,28 +4,37 @@ import './Login.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState('');
 
   useEffect(() => {
-    const video = document.getElementById('background-video');
-    const attemptPlay = () => {
-      video.play().catch(error => {
-        console.error('Error attempting to play', error);
+    const loadRecaptcha = () => {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha.execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'login' }).then(token => {
+          setRecaptchaToken(token);
+        });
       });
     };
-
-    document.addEventListener('click', attemptPlay);
-    document.addEventListener('touchstart', attemptPlay);
-
-    return () => {
-      document.removeEventListener('click', attemptPlay);
-      document.removeEventListener('touchstart', attemptPlay);
-    };
+    loadRecaptcha();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login:', { email, password });
+
+    if (!recaptchaToken) {
+      setError('Please complete the reCAPTCHA');
+      return;
+    }
+
+    const mainUser = process.env.REACT_APP_MAIN_USER;
+    const mainPassword = process.env.REACT_APP_MAIN_PASSWORD;
+
+    if (email === mainUser && password === mainPassword) {
+      alert('Login successful!');
+      // Redirect to dashboard or main page
+    } else {
+      setError('Invalid username or password');
+    }
   };
 
   return (
@@ -36,6 +45,7 @@ const Login = () => {
       </video>
       <div className="login-container">
         <h2>Login</h2>
+        {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="email">Email</label>
