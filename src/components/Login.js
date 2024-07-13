@@ -21,7 +21,7 @@ const Login = () => {
   return (
     <div className="login-wrapper">
       <video id="background-video" autoPlay muted loop className="background-video">
-        <source src={`${process.env.PUBLIC_URL}/output.mp4`} type="video/mp4" />
+        <source src={`${process.env.PUBLIC_URL}/output_mobile.mp4`} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="login-container">
