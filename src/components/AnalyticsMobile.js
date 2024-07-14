@@ -57,6 +57,8 @@ const AnalyticsMobile = () => {
       toolbar: {
         show: true,
       },
+      width: '100%',
+      height: 300,
     },
     xaxis: {
       categories: currentData.map((d) => d.name),
@@ -67,20 +69,6 @@ const AnalyticsMobile = () => {
     stroke: {
       curve: 'smooth',
     },
-    responsive: [
-      {
-        breakpoint: 768,
-        options: {
-          chart: {
-            width: '100%',
-            height: 300,
-          },
-          legend: {
-            position: 'bottom',
-          },
-        },
-      },
-    ],
   };
 
   const lineChartData = [
@@ -100,7 +88,7 @@ const AnalyticsMobile = () => {
   const pieChartData = currentData.map((d) => d.estimates);
 
   return (
-    <div className="analytics mobile">
+    <div className="analytics">
       <h1>Analytics Dashboard</h1>
       <div className="time-frame-selector">
         <button onClick={() => setTimeFrame('daily')}>Daily</button>

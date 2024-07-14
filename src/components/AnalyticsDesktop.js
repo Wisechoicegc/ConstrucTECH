@@ -57,6 +57,8 @@ const AnalyticsDesktop = () => {
       toolbar: {
         show: true,
       },
+      width: '100%',
+      height: 300,
     },
     xaxis: {
       categories: currentData.map((d) => d.name),
@@ -67,20 +69,6 @@ const AnalyticsDesktop = () => {
     stroke: {
       curve: 'smooth',
     },
-    responsive: [
-      {
-        breakpoint: 768,
-        options: {
-          chart: {
-            width: '100%',
-            height: 300,
-          },
-          legend: {
-            position: 'bottom',
-          },
-        },
-      },
-    ],
   };
 
   const lineChartData = [
@@ -110,19 +98,19 @@ const AnalyticsDesktop = () => {
       <div className="charts">
         <div className="chart">
           <h2>Estimates</h2>
-          <Chart options={chartOptions} series={lineChartData} type="line" height={400} />
+          <Chart options={chartOptions} series={lineChartData} type="line" height={300} />
         </div>
         <div className="chart">
           <h2>Amount of Estimates</h2>
-          <Chart options={chartOptions} series={barChartData} type="bar" height={400} />
+          <Chart options={chartOptions} series={barChartData} type="bar" height={300} />
         </div>
         <div className="chart">
           <h2>Estimates by Type</h2>
-          <Chart options={chartOptions} series={pieChartData} type="pie" height={400} />
+          <Chart options={chartOptions} series={pieChartData} type="pie" height={300} />
         </div>
         <div className="chart">
           <h2>Monthly Growth</h2>
-          <Chart options={chartOptions} series={lineChartData} type="line" height={400} />
+          <Chart options={chartOptions} series={lineChartData} type="line" height={300} />
         </div>
       </div>
     </div>

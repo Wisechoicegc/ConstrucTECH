@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import LoadingScreen from './LoadingScreen';
 import './Login.css';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -50,8 +50,9 @@ const Login = () => {
     if (email === mainUser && password === mainPassword) {
       console.log('Login successful! Redirecting to analytics...');
       setIsLoading(true);
+      onLogin();
       setTimeout(() => {
-        navigate('/analytics');
+        navigate('/dashboard');
       }, 2000); // Simulate a delay for demonstration
     } else {
       console.error('Invalid username or password');
