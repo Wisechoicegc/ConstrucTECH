@@ -1,0 +1,42 @@
+.analytics {
+  padding: 20px;
+}
+
+.time-frame-selector {
+  margin-bottom: 20px;
+}
+
+.time-frame-selector button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.time-frame-selector button:hover {
+  background-color: #0056b3;
+}
+
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.chart {
+  flex: 1 1 calc(50% - 20px);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .chart {
+    flex: 1 1 100%;
+  }
+}

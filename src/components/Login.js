@@ -48,10 +48,10 @@ const Login = () => {
     }
 
     if (email === mainUser && password === mainPassword) {
-      console.log('Login successful! Redirecting to dashboard...');
+      console.log('Login successful! Redirecting to analytics...');
       setIsLoading(true);
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/analytics');
       }, 2000); // Simulate a delay for demonstration
     } else {
       console.error('Invalid username or password');

@@ -8,6 +8,7 @@ import Settings from './components/Settings';
 import Integrations from './components/Integrations';
 import Estimates from './components/Estimates';
 import StartEstimate from './components/StartEstimate';
+import Analytics from './components/Analytics';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/integrations" element={<DashboardLayout><Integrations /></DashboardLayout>} />
         <Route path="/estimates" element={<DashboardLayout><Estimates /></DashboardLayout>} />
         <Route path="/start-estimate" element={<DashboardLayout><StartEstimate /></DashboardLayout>} />
+        <Route path="/analytics" element={<DashboardLayout><Analytics /></DashboardLayout>} />
       </Routes>
     </Router>
   );
