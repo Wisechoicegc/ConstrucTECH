@@ -42,7 +42,12 @@
     padding: 10px;
   }
 
+  .charts {
+    flex-direction: column;
+  }
+
   .chart {
     flex: 1 1 100%;
+    margin-bottom: 20px;
   }
 }
