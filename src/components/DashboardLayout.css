@@ -1,0 +1,9 @@
+.dashboard-layout {
+  display: flex;
+}
+
+.main-content {
+  margin-left: 250px; /* same width as the sidebar */
+  padding: 20px;
+  width: 100%;
+}
