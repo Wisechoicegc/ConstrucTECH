@@ -54,6 +54,23 @@ const AnalyticsMobile = () => {
           speed: 350,
         },
       },
+      toolbar: {
+        show: true,
+      },
+      responsive: [
+        {
+          breakpoint: 768,
+          options: {
+            chart: {
+              width: '100%',
+              height: 300,
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
     },
     xaxis: {
       categories: currentData.map((d) => d.name),
