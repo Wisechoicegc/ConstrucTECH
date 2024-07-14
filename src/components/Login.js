@@ -12,17 +12,22 @@ const Login = () => {
 
   useEffect(() => {
     const loadRecaptcha = () => {
-      if (window.grecaptcha) {
-        window.grecaptcha.ready(() => {
-          window.grecaptcha.execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'login' }).then(token => {
-            console.log('reCAPTCHA token:', token); // Log the token for testing purposes
-            setRecaptchaToken(token);
-          }).catch(error => {
-            console.error('reCAPTCHA execution error:', error);
+      const validHostnames = ['localhost', 'wisechoicegc.github.io'];
+      if (validHostnames.includes(window.location.hostname)) {
+        if (window.grecaptcha) {
+          window.grecaptcha.ready(() => {
+            window.grecaptcha.execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'login' }).then(token => {
+              console.log('reCAPTCHA token:', token); // Log the token for testing purposes
+              setRecaptchaToken(token);
+            }).catch(error => {
+              console.error('reCAPTCHA execution error:', error);
+            });
           });
-        });
+        } else {
+          console.error('reCAPTCHA not loaded');
+        }
       } else {
-        console.error('reCAPTCHA not loaded');
+        console.error('Invalid hostname for reCAPTCHA:', window.location.hostname);
       }
     };
     loadRecaptcha();
