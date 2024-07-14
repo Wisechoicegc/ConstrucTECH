@@ -69,14 +69,12 @@ input {
 }
 
 .password-input-container {
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .password-toggle-icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
+  margin-left: 10px;
   cursor: pointer;
 }
 

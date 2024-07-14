@@ -33,8 +33,8 @@ const Login = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const mainUser = process.env.REACT_APP_MAIN_USER;
-    const mainPassword = process.env.REACT_APP_MAIN_PASSWORD;
+    const mainUser = 'wisechoicegc@gmail.com';
+    const mainPassword = 'password1';
 
     console.log('Email:', email);
     console.log('Password:', password);
@@ -48,10 +48,10 @@ const Login = ({ onLogin }) => {
     }
 
     if (email === mainUser && password === mainPassword) {
-      console.log('Login successful! Redirecting to analytics...');
+      console.log('Login successful! Redirecting to dashboard...');
       setIsLoading(true);
-      onLogin();
       setTimeout(() => {
+        onLogin();
         navigate('/dashboard');
       }, 2000); // Simulate a delay for demonstration
     } else {
