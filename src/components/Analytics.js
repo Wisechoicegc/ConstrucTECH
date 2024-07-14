@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import './Analytics.css';
 
@@ -36,6 +36,16 @@ const data = {
 
 const Analytics = () => {
   const [timeFrame, setTimeFrame] = useState('monthly');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const currentData = data[timeFrame];
 
@@ -48,23 +58,23 @@ const Analytics = () => {
         speed: 800,
         animateGradually: {
           enabled: true,
-          delay: 150
+          delay: 150,
         },
         dynamicAnimation: {
           enabled: true,
-          speed: 350
-        }
-      }
+          speed: 350,
+        },
+      },
     },
     xaxis: {
-      categories: currentData.map(d => d.name)
+      categories: currentData.map((d) => d.name),
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     stroke: {
-      curve: 'smooth'
-    }
+      curve: 'smooth',
+    },
   };
 
   const barChartOptions = {
@@ -76,20 +86,20 @@ const Analytics = () => {
         speed: 800,
         animateGradually: {
           enabled: true,
-          delay: 150
+          delay: 150,
         },
         dynamicAnimation: {
           enabled: true,
-          speed: 350
-        }
-      }
+          speed: 350,
+        },
+      },
     },
     xaxis: {
-      categories: currentData.map(d => d.name)
+      categories: currentData.map((d) => d.name),
     },
     dataLabels: {
-      enabled: false
-    }
+      enabled: false,
+    },
   };
 
   const pieChartOptions = {
@@ -101,35 +111,35 @@ const Analytics = () => {
         speed: 800,
         animateGradually: {
           enabled: true,
-          delay: 150
+          delay: 150,
         },
         dynamicAnimation: {
           enabled: true,
-          speed: 350
-        }
+          speed: 350,
+        },
       },
-      labels: currentData.map(d => d.name)
-    }
+      labels: currentData.map((d) => d.name),
+    },
   };
 
   const lineChartData = [
     {
       name: 'Estimates',
-      data: currentData.map(d => d.estimates)
-    }
+      data: currentData.map((d) => d.estimates),
+    },
   ];
 
   const barChartData = [
     {
       name: 'Estimates',
-      data: currentData.map(d => d.estimates)
-    }
+      data: currentData.map((d) => d.estimates),
+    },
   ];
 
-  const pieChartData = currentData.map(d => d.estimates);
+  const pieChartData = currentData.map((d) => d.estimates);
 
   return (
-    <div className="analytics">
+    <div className={`analytics ${isMobile ? 'mobile' : ''}`}>
       <h1>Analytics Dashboard</h1>
       <div className="time-frame-selector">
         <button onClick={() => setTimeFrame('daily')}>Daily</button>
@@ -139,39 +149,19 @@ const Analytics = () => {
       <div className="charts">
         <div className="chart">
           <h2>Estimates</h2>
-          <Chart
-            options={lineChartOptions}
-            series={lineChartData}
-            type="line"
-            height={400}
-          />
+          <Chart options={lineChartOptions} series={lineChartData} type="line" height={isMobile ? 300 : 400} />
         </div>
         <div className="chart">
           <h2>Amount of Estimates</h2>
-          <Chart
-            options={barChartOptions}
-            series={barChartData}
-            type="bar"
-            height={400}
-          />
+          <Chart options={barChartOptions} series={barChartData} type="bar" height={isMobile ? 300 : 400} />
         </div>
         <div className="chart">
           <h2>Estimates by Type</h2>
-          <Chart
-            options={pieChartOptions}
-            series={pieChartData}
-            type="pie"
-            height={400}
-          />
+          <Chart options={pieChartOptions} series={pieChartData} type="pie" height={isMobile ? 300 : 400} />
         </div>
         <div className="chart">
           <h2>Monthly Growth</h2>
-          <Chart
-            options={lineChartOptions}
-            series={lineChartData}
-            type="line"
-            height={400}
-          />
+          <Chart options={lineChartOptions} series={lineChartData} type="line" height={isMobile ? 300 : 400} />
         </div>
       </div>
     </div>
