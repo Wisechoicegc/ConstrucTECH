@@ -1,5 +1,6 @@
 .analytics {
   padding: 20px;
+  margin-left: 250px; /* Adjust this if the sidebar width changes */
 }
 
 .time-frame-selector {
@@ -36,6 +37,11 @@
 }
 
 @media (max-width: 768px) {
+  .analytics {
+    margin-left: 0;
+    padding: 10px;
+  }
+
   .chart {
     flex: 1 1 100%;
   }
