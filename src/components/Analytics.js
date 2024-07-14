@@ -6,11 +6,7 @@ import AnalyticsMobile from './AnalyticsMobile';
 const Analytics = () => {
   const isMobile = useMediaQuery('(max-width:768px)');
 
-  return (
-    <div>
-      {isMobile ? <AnalyticsMobile /> : <AnalyticsDesktop />}
-    </div>
-  );
+  return isMobile ? <AnalyticsMobile /> : <AnalyticsDesktop />;
 };
 
 export default Analytics;

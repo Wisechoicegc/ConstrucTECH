@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Person, Settings, IntegrationInstructions, Receipt, AddCircle, Menu } from '@mui/icons-material';
+import { Home, Person, Settings, IntegrationInstructions, Receipt, AddCircle } from '@mui/icons-material';
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -13,7 +14,7 @@ const Sidebar = () => {
   return (
     <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
       <button className="toggle-button" onClick={toggleSidebar}>
-        <Menu />
+        {isOpen ? <ArrowBackIos /> : <ArrowForwardIos />}
       </button>
       {isOpen && (
         <div>
