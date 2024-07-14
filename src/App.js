@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { AuthProvider, AuthContext } from './contexts/AuthContext'; // Ensure this path is correct
 import Sidebar from './components/Sidebar';
 import Analytics from './components/Analytics';
 import Profile from './components/Profile';
@@ -11,35 +12,37 @@ import Login from './components/Login';
 import './App.css';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-  };
-
   return (
-    <Router>
-      <div className="App">
-        {isAuthenticated && <Sidebar />}
-        <div className="main-content">
-          <Routes>
-            <Route path="/" element={<Login onLogin={handleLogin} />} />
-            {isAuthenticated ? (
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <AuthContext.Consumer>
+            {({ isAuthenticated }) => (
               <>
-                <Route path="/dashboard" element={<Analytics />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/integrations" element={<Integrations />} />
-                <Route path="/estimates" element={<Estimates />} />
-                <Route path="/start-estimate" element={<StartEstimate />} />
+                {isAuthenticated && <Sidebar />}
+                <div className="main-content">
+                  <Routes>
+                    <Route path="/" element={<Login />} />
+                    {isAuthenticated ? (
+                      <>
+                        <Route path="/dashboard" element={<Analytics />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/settings" element={<Settings />} />
+                        <Route path="/integrations" element={<Integrations />} />
+                        <Route path="/estimates" element={<Estimates />} />
+                        <Route path="/start-estimate" element={<StartEstimate />} />
+                      </>
+                    ) : (
+                      <Route path="*" element={<Navigate to="/" />} />
+                    )}
+                  </Routes>
+                </div>
               </>
-            ) : (
-              <Route path="*" element={<Navigate to="/" />} />
             )}
-          </Routes>
+          </AuthContext.Consumer>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 };
 

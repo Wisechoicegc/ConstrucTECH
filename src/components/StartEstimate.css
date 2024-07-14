@@ -3,6 +3,10 @@
   padding: 20px;
 }
 
+.step {
+  margin-bottom: 20px;
+}
+
 .upload-container {
   display: flex;
   justify-content: center;
@@ -10,7 +14,7 @@
   margin-bottom: 20px;
 }
 
-.upload-button {
+.upload-button, .next-button, .analyze-button {
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
@@ -20,7 +24,7 @@
   transition: background-color 0.3s ease;
 }
 
-.upload-button:hover {
+.upload-button:hover, .next-button:hover, .analyze-button:hover {
   background-color: #0056b3;
 }
 
@@ -37,20 +41,6 @@
   border: 2px solid #ddd;
   border-radius: 10px;
   margin-bottom: 20px;
-}
-
-.analyze-button {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.analyze-button:hover {
-  background-color: #218838;
 }
 
 .results {

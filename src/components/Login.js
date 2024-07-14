@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 import LoadingScreen from './LoadingScreen';
 import './Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -11,6 +12,7 @@ const Login = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   useEffect(() => {
     const loadRecaptcha = () => {
@@ -33,8 +35,8 @@ const Login = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const mainUser = 'wisechoicegc@gmail.com';
-    const mainPassword = 'password1';
+    const mainUser = process.env.REACT_APP_MAIN_USER;
+    const mainPassword = process.env.REACT_APP_MAIN_PASSWORD;
 
     console.log('Email:', email);
     console.log('Password:', password);
@@ -51,7 +53,7 @@ const Login = ({ onLogin }) => {
       console.log('Login successful! Redirecting to dashboard...');
       setIsLoading(true);
       setTimeout(() => {
-        onLogin();
+        login();
         navigate('/dashboard');
       }, 2000); // Simulate a delay for demonstration
     } else {
