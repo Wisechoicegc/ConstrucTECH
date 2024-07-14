@@ -49,9 +49,8 @@ const Analytics = () => {
 
   const currentData = data[timeFrame];
 
-  const lineChartOptions = {
+  const chartOptions = {
     chart: {
-      id: 'line-chart',
       animations: {
         enabled: true,
         easing: 'easeinout',
@@ -75,51 +74,16 @@ const Analytics = () => {
     stroke: {
       curve: 'smooth',
     },
-  };
-
-  const barChartOptions = {
-    chart: {
-      id: 'bar-chart',
-      animations: {
-        enabled: true,
-        easing: 'easeinout',
-        speed: 800,
-        animateGradually: {
-          enabled: true,
-          delay: 150,
-        },
-        dynamicAnimation: {
-          enabled: true,
-          speed: 350,
+    responsive: [
+      {
+        breakpoint: 768,
+        options: {
+          chart: {
+            height: 300,
+          },
         },
       },
-    },
-    xaxis: {
-      categories: currentData.map((d) => d.name),
-    },
-    dataLabels: {
-      enabled: false,
-    },
-  };
-
-  const pieChartOptions = {
-    chart: {
-      id: 'pie-chart',
-      animations: {
-        enabled: true,
-        easing: 'easeinout',
-        speed: 800,
-        animateGradually: {
-          enabled: true,
-          delay: 150,
-        },
-        dynamicAnimation: {
-          enabled: true,
-          speed: 350,
-        },
-      },
-      labels: currentData.map((d) => d.name),
-    },
+    ],
   };
 
   const lineChartData = [
@@ -149,19 +113,19 @@ const Analytics = () => {
       <div className="charts">
         <div className="chart">
           <h2>Estimates</h2>
-          <Chart options={lineChartOptions} series={lineChartData} type="line" height={isMobile ? 300 : 400} />
+          <Chart options={chartOptions} series={lineChartData} type="line" height={isMobile ? 300 : 400} />
         </div>
         <div className="chart">
           <h2>Amount of Estimates</h2>
-          <Chart options={barChartOptions} series={barChartData} type="bar" height={isMobile ? 300 : 400} />
+          <Chart options={chartOptions} series={barChartData} type="bar" height={isMobile ? 300 : 400} />
         </div>
         <div className="chart">
           <h2>Estimates by Type</h2>
-          <Chart options={pieChartOptions} series={pieChartData} type="pie" height={isMobile ? 300 : 400} />
+          <Chart options={chartOptions} series={pieChartData} type="pie" height={isMobile ? 300 : 400} />
         </div>
         <div className="chart">
           <h2>Monthly Growth</h2>
-          <Chart options={lineChartOptions} series={lineChartData} type="line" height={isMobile ? 300 : 400} />
+          <Chart options={chartOptions} series={lineChartData} type="line" height={isMobile ? 300 : 400} />
         </div>
       </div>
     </div>
