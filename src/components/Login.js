@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LoadingScreen from './LoadingScreen';
 import './Login.css';
 
 const Login = () => {
@@ -8,26 +9,22 @@ const Login = () => {
   const [error, setError] = useState('');
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const loadRecaptcha = () => {
-      const validHostnames = ['localhost', 'wisechoicegc.github.io'];
-      if (validHostnames.includes(window.location.hostname)) {
-        if (window.grecaptcha) {
-          window.grecaptcha.ready(() => {
-            window.grecaptcha.execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'login' }).then(token => {
-              console.log('reCAPTCHA token:', token); // Log the token for testing purposes
-              setRecaptchaToken(token);
-            }).catch(error => {
-              console.error('reCAPTCHA execution error:', error);
-            });
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha.execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'login' }).then(token => {
+            console.log('reCAPTCHA token:', token); // Log the token for testing purposes
+            setRecaptchaToken(token);
+          }).catch(error => {
+            console.error('reCAPTCHA execution error:', error);
           });
-        } else {
-          console.error('reCAPTCHA not loaded');
-        }
+        });
       } else {
-        console.error('Invalid hostname for reCAPTCHA:', window.location.hostname);
+        console.error('reCAPTCHA not loaded');
       }
     };
     loadRecaptcha();
@@ -52,8 +49,10 @@ const Login = () => {
 
     if (email === mainUser && password === mainPassword) {
       console.log('Login successful! Redirecting to dashboard...');
-      alert('Login successful!');
-      navigate('/dashboard');
+      setIsLoading(true);
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 2000); // Simulate a delay for demonstration
     } else {
       console.error('Invalid username or password');
       setError('Invalid username or password');
@@ -66,6 +65,7 @@ const Login = () => {
 
   return (
     <div className="login-wrapper">
+      {isLoading && <LoadingScreen />}
       <video id="background-video" autoPlay muted loop playsInline className="background-video">
         <source src={`${process.env.PUBLIC_URL}/output_mobile.mp4`} type="video/mp4" />
         Your browser does not support the video tag.
