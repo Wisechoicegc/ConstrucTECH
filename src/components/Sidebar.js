@@ -8,10 +8,7 @@ const Sidebar = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   return (
-    <div className={`sidebar ${isMobile ? 'collapsed' : ''} min-h-screen bg-gray-800 text-white flex flex-col`}>
-      <div className="logo p-4">
-        <h2 className="text-xl font-bold">Logo</h2>
-      </div>
+    <div className={`sidebar min-h-screen ${isMobile ? 'w-16' : 'w-64'} bg-gray-800 text-white flex flex-col`}>
       <ul className="flex flex-col flex-grow">
         <li className="p-4 hover:bg-gray-700">
           <Link to="/dashboard" className="flex items-center space-x-2">
