@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 import LoadingScreen from './LoadingScreen';
 import './Login.css';
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -33,21 +35,14 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const mainUser = process.env.REACT_APP_MAIN_USER;
-    const mainPassword = process.env.REACT_APP_MAIN_PASSWORD;
-
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Main User:', mainUser);
-    console.log('Main Password:', mainPassword);
-    console.log('reCAPTCHA token at submit:', recaptchaToken);
-
     if (!recaptchaToken) {
       setError('Please complete the reCAPTCHA');
       return;
     }
 
-    if (email === mainUser && password === mainPassword) {
+    const success = login(email, password);
+
+    if (success) {
       console.log('Login successful! Redirecting to dashboard...');
       setIsLoading(true);
       setTimeout(() => {
