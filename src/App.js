@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { AuthProvider, AuthContext } from './contexts/AuthContext'; // Ensure this path is correct
+import { AuthProvider, AuthContext } from './contexts/AuthContext';
 import Sidebar from './components/Sidebar';
 import Analytics from './components/Analytics';
 import Profile from './components/Profile';
@@ -20,7 +20,7 @@ const App = () => {
             {({ isAuthenticated }) => (
               <>
                 {isAuthenticated && <Sidebar />}
-                <div className="main-content">
+                <div className={`main-content ${isAuthenticated ? '' : 'full-width'}`}>
                   <Routes>
                     <Route path="/" element={<Login />} />
                     {isAuthenticated ? (

@@ -1,35 +1,46 @@
 .sidebar {
-  height: 100%;
-  background: #333;
-  color: white;
-  padding: 10px;
-  box-sizing: border-box;
-  overflow: hidden;
-  width: 250px; /* Ensure this is always set */
+  width: 250px;
+  transition: width 0.3s;
 }
 
-.sidebar .logo h2 {
-  font-size: 1.5em;
-  margin-bottom: 1em;
-  text-align: center;
+.sidebar.collapsed {
+  width: 50px;
 }
 
 .sidebar ul {
-  list-style: none;
+  list-style-type: none;
   padding: 0;
 }
 
 .sidebar ul li {
-  margin: 15px 0;
+  margin: 20px 0;
 }
 
 .sidebar ul li a {
-  color: white;
-  text-decoration: none;
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
 }
 
-.sidebar ul li a svg {
-  margin-right: 10px;
+.sidebar ul li a span {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.sidebar.collapsed ul li a span {
+  display: none;
+}
+
+.collapse-button {
+  position: fixed;
+  top: 10px;
+  left: 260px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: left 0.3s;
+}
+
+.collapse-button.collapsed {
+  left: 60px;
 }
