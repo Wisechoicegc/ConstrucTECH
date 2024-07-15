@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './contexts/AuthContext';
-import { ThemeProvider } from './contexts/ThemeContext';
 import Sidebar from './components/Sidebar';
 import Analytics from './components/Analytics';
 import Profile from './components/Profile';
@@ -14,38 +13,36 @@ import './App.css';
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <Router>
-          <div className="App">
-            <AuthContext.Consumer>
-              {({ isAuthenticated }) => (
-                <>
-                  {isAuthenticated && <Sidebar />}
-                  <div className={`main-content ${isAuthenticated ? '' : 'full-width'}`}>
-                    <Routes>
-                      <Route path="/" element={<Login />} />
-                      {isAuthenticated ? (
-                        <>
-                          <Route path="/dashboard" element={<Analytics />} />
-                          <Route path="/profile" element={<Profile />} />
-                          <Route path="/settings" element={<Settings />} />
-                          <Route path="/integrations" element={<Integrations />} />
-                          <Route path="/estimates" element={<Estimates />} />
-                          <Route path="/start-estimate" element={<StartEstimate />} />
-                        </>
-                      ) : (
-                        <Route path="*" element={<Navigate to="/" />} />
-                      )}
-                    </Routes>
-                  </div>
-                </>
-              )}
-            </AuthContext.Consumer>
-          </div>
-        </Router>
-      </AuthProvider>
-    </ThemeProvider>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <AuthContext.Consumer>
+            {({ isAuthenticated }) => (
+              <>
+                {isAuthenticated && <Sidebar />}
+                <div className={`main-content ${isAuthenticated ? '' : 'full-width'}`}>
+                  <Routes>
+                    <Route path="/" element={<Login />} />
+                    {isAuthenticated ? (
+                      <>
+                        <Route path="/dashboard" element={<Analytics />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/settings" element={<Settings />} />
+                        <Route path="/integrations" element={<Integrations />} />
+                        <Route path="/estimates" element={<Estimates />} />
+                        <Route path="/start-estimate" element={<StartEstimate />} />
+                      </>
+                    ) : (
+                      <Route path="*" element={<Navigate to="/" />} />
+                    )}
+                  </Routes>
+                </div>
+              </>
+            )}
+          </AuthContext.Consumer>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 };
 

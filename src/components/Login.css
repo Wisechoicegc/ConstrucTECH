@@ -2,6 +2,7 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: transparent; /* Ensure the background color is transparent */
 }
 
 .login-wrapper {
@@ -9,6 +10,7 @@ body, html {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  background-color: transparent; /* Ensure the background color is transparent */
 }
 
 .background-video {
