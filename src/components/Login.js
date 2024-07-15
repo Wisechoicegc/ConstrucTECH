@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from './LoadingScreen'; // Ensure this path is correct
+import { useAuth } from '../contexts/AuthContext';
 import './Login.css';
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,22 +32,28 @@ const Login = () => {
     loadRecaptcha();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const mainUser = process.env.REACT_APP_MAIN_USER;
+    const mainPassword = process.env.REACT_APP_MAIN_PASSWORD;
+
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Main User:', mainUser);
+    console.log('Main Password:', mainPassword);
+    console.log('reCAPTCHA token at submit:', recaptchaToken);
 
     if (!recaptchaToken) {
       setError('Please complete the reCAPTCHA');
       return;
     }
 
-    const success = login(email, password);
-
-    if (success) {
+    if (email === mainUser && password === mainPassword) {
       console.log('Login successful! Redirecting to dashboard...');
       setIsLoading(true);
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 2000); // Simulate a delay for demonstration
+      await login(email, password);
+      navigate('/dashboard');
     } else {
       console.error('Invalid username or password');
       setError('Invalid username or password');

@@ -1,47 +1,11 @@
+/* Import Tailwind base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   display: flex;
   height: 100vh;
-}
-
-.sidebar {
-  width: 250px;
-  background: #343a40;
-  color: white;
-  transition: width 0.3s;
-}
-
-.sidebar.collapsed {
-  width: 60px;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  padding: 15px 20px;
-  transition: background 0.3s;
-}
-
-.sidebar li:hover {
-  background: #495057;
-}
-
-.sidebar li a {
-  color: white;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-
-.sidebar li a svg {
-  margin-right: 10px;
-}
-
-.sidebar .logo {
-  padding: 20px;
-  text-align: center;
 }
 
 .main-content {
@@ -51,31 +15,6 @@
   transition: margin-left 0.3s;
 }
 
-.main-content.collapsed {
-  margin-left: 60px;
-}
-
-.collapse-button {
-  position: fixed;
-  top: 10px;
-  left: 260px;
-  cursor: pointer;
-  z-index: 1000;
-  transition: left 0.3s;
-}
-
-.collapse-button.collapsed {
-  left: 70px;
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 60px;
-  }
-  .main-content {
-    margin-left: 60px;
-  }
-  .collapse-button {
-    left: 70px;
-  }
+.full-width {
+  margin-left: 0;
 }
