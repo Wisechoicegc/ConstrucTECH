@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as ml5 from 'ml5';
+import * as tf from '@tensorflow/tfjs';
 import './StartEstimate.css';
 import LoadingScreen from './LoadingScreen';
 
@@ -33,19 +33,24 @@ const StartEstimate = () => {
     reader.readAsDataURL(file);
   };
 
-  const analyzeImage = () => {
+  const analyzeImage = async () => {
     setIsLoading(true);
-    const classifier = ml5.imageClassifier('MobileNet', () => {
-      classifier.classify(document.getElementById('uploadedImage'), (err, results) => {
-        if (err) {
-          console.error(err);
-        } else {
-          setResults(results);
-        }
-        setIsLoading(false);
-        handleNextStep();
-      });
-    });
+    try {
+      // Ensure the backend is available
+      await tf.setBackend('webgl'); // or 'cpu', depending on your environment
+      await tf.ready();
+
+      const model = await tf.loadGraphModel('https://path-to-your-model/model.json');
+      const img = document.getElementById('uploadedImage');
+      const tensor = tf.browser.fromPixels(img).resizeNearestNeighbor([224, 224]).toFloat().expandDims();
+
+      const predictions = await model.predict(tensor).data();
+      setResults(predictions);
+    } catch (error) {
+      console.error('Error loading or processing the model:', error);
+    }
+    setIsLoading(false);
+    handleNextStep();
   };
 
   return (

@@ -6,7 +6,6 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const login = (email, password) => {
-    // Mock login function
     return new Promise((resolve) => {
       setIsAuthenticated(true);
       resolve();
