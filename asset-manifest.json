@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ConstrucTECH/static/css/main.3dca3f25.css",
-    "main.js": "/ConstrucTECH/static/js/main.377df52d.js",
+    "main.css": "/ConstrucTECH/static/css/main.e7c8bc6b.css",
+    "main.js": "/ConstrucTECH/static/js/main.edd28cbc.js",
     "index.html": "/ConstrucTECH/index.html",
-    "main.3dca3f25.css.map": "/ConstrucTECH/static/css/main.3dca3f25.css.map",
-    "main.377df52d.js.map": "/ConstrucTECH/static/js/main.377df52d.js.map"
+    "main.e7c8bc6b.css.map": "/ConstrucTECH/static/css/main.e7c8bc6b.css.map",
+    "main.edd28cbc.js.map": "/ConstrucTECH/static/js/main.edd28cbc.js.map"
   },
   "entrypoints": [
-    "static/css/main.3dca3f25.css",
-    "static/js/main.377df52d.js"
+    "static/css/main.e7c8bc6b.css",
+    "static/js/main.edd28cbc.js"
   ]
 }
